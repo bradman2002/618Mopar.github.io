@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>618 MOPAR — Southern Illinois Car Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:    #D9000D;
+    --orange: #FF5C00;
+    --black:  #0A0A0A;
+    --dark:   #111111;
+    --steel:  #1C1C1C;
+    --silver: #B0B0B0;
+    --white:  #F0EDE8;
+    --gold:   #C8A84B;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Black Ops One', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--white); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Diagonal speed lines background */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        -18deg,
+        transparent,
+        transparent 60px,
+        rgba(217,0,13,0.04) 60px,
+        rgba(217,0,13,0.04) 62px
+      );
+  }
+
+  /* Big gradient backdrop */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(217,0,13,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(255,92,0,0.08) 0%, transparent 60%),
+      linear-gradient(160deg, #0A0A0A 0%, #1a0a0a 60%, #0A0A0A 100%);
+    z-index: -1;
+  }
+
+  /* Large 618 watermark */
+  .hero-number {
+    position: absolute;
+    top: 50%;
+    right: -2%;
+    transform: translateY(-55%);
+    font-family: 'Black Ops One', cursive;
+    font-size: clamp(18rem, 30vw, 38rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(217,0,13,0.15);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 36px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Black Ops One', cursive;
+    font-size: clamp(4rem, 9vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .hero-title .line2 {
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--silver);
+    letter-spacing: 1px;
+    max-width: 480px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 16px 38px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange); transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+  /* Scroll indicator */
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    right: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+  }
+  .hero-scroll span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    background: var(--red);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 28px 32px;
+    text-align: center;
+    border-right: 1px solid rgba(0,0,0,0.2);
+    position: relative;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Black Ops One', cursive;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--white);
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.75);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 48px; }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Black Ops One', cursive;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--silver);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--white); }
+
+  .about-visual {
+    position: relative;
+  }
+
+  /* Stylized area code badge */
+  .area-badge {
+    background: var(--steel);
+    border: 1px solid rgba(217,0,13,0.3);
+    padding: 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .area-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(217,0,13,0.08) 0%, transparent 60%);
+  }
+  .area-badge-num {
+    font-family: 'Black Ops One', cursive;
+    font-size: 9rem;
+    line-height: 1;
+    color: var(--red);
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+  .area-badge-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--silver);
+    position: relative;
+    z-index: 1;
+    margin-top: 8px;
+  }
+
+  .badge-accent {
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 40px; height: 40px;
+    border-top: 3px solid var(--red);
+    border-left: 3px solid var(--red);
+  }
+  .badge-accent.br {
+    top: auto; left: auto;
+    bottom: -1px; right: -1px;
+    border-top: none; border-left: none;
+    border-bottom: 3px solid var(--red);
+    border-right: 3px solid var(--red);
+  }
+
+  /* ── VEHICLES ── */
+  #vehicles {
+    background: var(--dark);
+    padding: 100px 48px;
+  }
+  .vehicles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+
+  .car-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .car-card {
+    background: var(--steel);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .car-card:first-child {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+
+  /* SVG car silhouettes as stand-ins */
+  .car-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .car-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    z-index: 1;
+  }
+  .car-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    z-index: 2;
+  }
+  .car-year {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+  .car-name {
+    font-family: 'Black Ops One', cursive;
+    font-size: 1.5rem;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .car-owner {
+    font-size: 0.8rem;
+    color: var(--silver);
+    margin-top: 2px;
+  }
+
+  /* Car illustrations using CSS/SVG */
+  .car-svg {
+    width: 85%;
+    max-width: 480px;
+    opacity: 0.25;
+    filter: drop-shadow(0 0 30px rgba(217,0,13,0.3));
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .car-card:hover .car-svg {
+    opacity: 0.45;
+    transform: scale(1.04) translateX(-10px);
+  }
+
+  /* Gradient overlays per card for variety */
+  .car-card:nth-child(1) .car-bg { background: linear-gradient(135deg, #1a0505, #2a0a0a); }
+  .car-card:nth-child(2) .car-bg { background: linear-gradient(135deg, #0a0a12, #1a1a2a); }
+  .car-card:nth-child(3) .car-bg { background: linear-gradient(135deg, #0a120a, #1a2a1a); }
+  .car-card:nth-child(4) .car-bg { background: linear-gradient(135deg, #12100a, #2a240a); }
+
+  /* ── EVENTS ── */
+  #events { padding: 100px 48px; }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+  }
+
+  .event-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .event-item {
+    background: var(--steel);
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 32px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .event-item:hover {
+    border-left-color: var(--red);
+    background: #222;
+  }
+
+  .event-date {
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding-right: 24px;
+  }
+  .event-date .month {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .event-date .day {
+    font-family: 'Black Ops One', cursive;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .event-details h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .event-details p {
+    font-size: 0.85rem;
+    color: var(--silver);
+  }
+
+  .event-type {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(217,0,13,0.5);
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  /* Sidebar join card */
+  .join-card {
+    background: var(--red);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .join-card::before {
+    content: 'JOIN';
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-family: 'Black Ops One', cursive;
+    font-size: 8rem;
+    color: rgba(0,0,0,0.2);
+    line-height: 1;
+  }
+  .join-card h3 {
+    font-family: 'Black Ops One', cursive;
+    font-size: 2.4rem;
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .join-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(240,237,232,0.85);
+    margin-bottom: 32px;
+  }
+  .btn-dark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    transition: background 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-dark:hover { background: var(--steel); }
+
+  /* ── GALLERY STRIP ── */
+  #gallery {
+    padding: 60px 0;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  .gallery-marquee {
+    display: flex;
+    gap: 4px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .gallery-tile {
+    width: 240px;
+    height: 160px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Black Ops One', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-tile:nth-child(odd) { background: #181818; }
+  .gallery-tile:nth-child(even) { background: #141414; }
+  .gallery-tile::after {
+    content: attr(data-car);
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(217,0,13,0.7);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--steel);
+    padding: 60px 48px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    border-top: 2px solid var(--red);
+  }
+
+  .footer-brand .logo {
+    font-family: 'Black Ops One', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: var(--red);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .footer-brand .logo span { color: var(--white); }
+  .footer-brand p {
+    color: var(--silver);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 12px;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  .footer-col ul li a {
+    color: rgba(176,176,176,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--red); }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 12px;
+  }
+  .footer-bottom p {
+    font-size: 0.78rem;
+    color: rgba(176,176,176,0.45);
+    letter-spacing: 0.5px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 16px;
+  }
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { gap: 20px; }
+    section, #vehicles, #events { padding: 70px 24px; }
+    #hero { padding: 0 24px 60px; }
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .car-grid { grid-template-columns: 1fr; }
+    .car-card:first-child { grid-column: span 1; }
+    .events-grid { grid-template-columns: 1fr; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr; }
+    .hero-number { font-size: 40vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>618 </span>MOPAR</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#vehicles">Rides</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-number" aria-hidden="true">618</div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Southern Illinois · Est. Area Code 618</p>
+    <h1 class="hero-title">
+      Pure<br><span class="line2">Mopar<br>Muscle.</span>
+    </h1>
+    <p class="hero-sub">Dodge. Chrysler. Plymouth. Jeep. Ram. If it carries the blood of Chrysler, it belongs with us. Southern Illinois's home for Mopar enthusiasts.</p>
+    <div class="hero-ctas">
+      <a href="#events" class="btn-primary">See Upcoming Events</a>
+      <a href="#join" class="btn-ghost">Join the Club</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-num">200+</div>
+    <div class="stat-label">Members</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Annual Events</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">618</div>
+    <div class="stat-label">Area Code Pride</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">SIL</div>
+    <div class="stat-label">Southern Illinois</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text fade-up">
+    <p class="section-eyebrow">Who We Are</p>
+    <h2 class="section-title">Built on<br><span style="color:var(--red)">Southern IL<br>Pride.</span></h2>
+    <p>The <strong>618 Mopar Car Club</strong> is Southern Illinois's premier gathering of Mopar enthusiasts — folks who bleed red, white, and Pentastar. From bone-stock classics to fire-breathing Hellcats, all Mopar metal is welcome here.</p>
+    <p>We're more than a club. We're a community of gearheads, shade-tree mechanics, and weekend warriors who share a passion for everything Chrysler has ever built. Whether you drive a '70 'Cuda or a 2024 Challenger, if it's Mopar — you're family.</p>
+    <p>Based in the <strong>618 area code</strong> of Southern Illinois, our members span from Carbondale to Belleville, Harrisburg to Alton. We host car shows, drag nights, charity cruises, and swap meets all year long.</p>
+    <a href="#events" class="btn-primary" style="margin-top:16px">View 2026 Calendar</a>
+  </div>
+
+  <div class="about-visual fade-up">
+    <div class="area-badge">
+      <div class="badge-accent"></div>
+      <div class="badge-accent br"></div>
+      <span class="area-badge-num">618</span>
+      <div class="area-badge-sub">Southern Illinois · Mopar Territory</div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLES / MEMBER RIDES -->
+<div id="vehicles">
+  <div class="vehicles-header fade-up">
+    <div>
+      <p class="section-eyebrow">Member Rides</p>
+      <h2 class="section-title">The Fleet</h2>
+    </div>
+    <a href="#join" class="btn-ghost">Submit Your Ride →</a>
+  </div>
+
+  <div class="car-grid">
+
+    <!-- Card 1 — Challenger Hellcat (featured) -->
+    <div class="car-card fade-up">
+      <div class="car-bg">
+        <!-- Dodge Challenger SVG silhouette -->
+        <svg class="car-svg" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body -->
+          <path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="white"/>
+          <!-- Roof -->
+          <path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="white"/>
+          <!-- Windows -->
+          <path d="M195 80 L215 50 L290 45 L290 78 Z" fill="black" opacity="0.6"/>
+          <path d="M295 78 L295 44 L365 43 L400 55 L400 78 Z" fill="black" opacity="0.6"/>
+          <!-- Wheels -->
+          <circle cx="140" cy="160" r="36" fill="#333"/>
+          <circle cx="140" cy="160" r="24" fill="#555"/>
+          <circle cx="140" cy="160" r="10" fill="#222"/>
+          <circle cx="455" cy="160" r="36" fill="#333"/>
+          <circle cx="455" cy="160" r="24" fill="#555"/>
+          <circle cx="455" cy="160" r="10" fill="#222"/>
+          <!-- Ground shadow -->
+          <ellipse cx="300" cy="196" rx="265" ry="10" fill="black" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="car-overlay"></div>
+      <div class="car-info">
+        <div class="car-year">2020 · Member Ride</div>
+        <div class="car-name">Challenger Hellcat<br>Widebody</div>
+        <div class="car-owner">797hp · Supercharged HEMI · Octane Red</div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Classic Charger -->
+    <div class="car-card fade-up">
+      <div class="car-bg">
+        <svg class="car-svg" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="white"/>
+          <path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="white"/>
+          <path d="M168 82 L185 55 L255 50 L255 80 Z" fill="black" opacity="0.6"/>
+          <path d="M260 80 L260 49 L350 48 L388 62 L388 80 Z" fill="black" opacity="0.6"/>
+          <circle cx="130" cy="160" r="36" fill="#333"/><circle cx="130" cy="160" r="24" fill="#555"/><circle cx="130" cy="160" r="10" fill="#222"/>
+          <circle cx="450" cy="160" r="36" fill="#333"/><circle cx="450" cy="160" r="24" fill="#555"/><circle cx="450" cy="160" r="10" fill="#222"/>
+          <ellipse cx="295" cy="196" rx="265" ry="10" fill="black" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="car-overlay"></div>
+      <div class="car-info">
+        <div class="car-year">1970 · Classic</div>
+        <div class="car-name">Dodge Charger<br>R/T</div>
+        <div class="car-owner">440 Six-Pack · Numbers Matching</div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Plymouth 'Cuda -->
+    <div class="car-card fade-up">
+      <div class="car-bg">
+        <svg class="car-svg" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="white"/>
+          <path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="white"/>
+          <path d="M185 80 L200 55 L265 48 L265 78 Z" fill="black" opacity="0.6"/>
+          <path d="M270 78 L270 47 L348 46 L384 62 L384 78 Z" fill="black" opacity="0.6"/>
+          <circle cx="135" cy="162" r="36" fill="#333"/><circle cx="135" cy="162" r="24" fill="#555"/><circle cx="135" cy="162" r="10" fill="#222"/>
+          <circle cx="450" cy="162" r="36" fill="#333"/><circle cx="450" cy="162" r="24" fill="#555"/><circle cx="450" cy="162" r="10" fill="#222"/>
+          <ellipse cx="295" cy="196" rx="255" ry="10" fill="black" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="car-overlay"></div>
+      <div class="car-info">
+        <div class="car-year">1971 · Classic</div>
+        <div class="car-name">Plymouth<br>'Cuda</div>
+        <div class="car-owner">426 HEMI · Vitamin C Orange</div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Ram TRX -->
+    <div class="car-card fade-up">
+      <div class="car-bg">
+        <svg class="car-svg" viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Truck body -->
+          <path d="M30 175 Q55 168 70 148 L80 120 L130 90 L215 80 L215 175 Z" fill="white"/>
+          <path d="M215 80 L215 175 L560 175 L545 148 L510 120 L480 105 L215 100 Z" fill="white"/>
+          <!-- Cab roof -->
+          <path d="M90 118 L110 68 L155 50 L210 48 L215 80 L215 100 L130 90 Z" fill="white"/>
+          <!-- Windows -->
+          <path d="M116 90 L128 58 L175 50 L212 52 L212 90 Z" fill="black" opacity="0.6"/>
+          <!-- Bed -->
+          <rect x="218" y="85" width="250" height="90" rx="2" fill="rgba(255,255,255,0.15)"/>
+          <!-- Wheels - big truck wheels -->
+          <circle cx="140" cy="175" r="42" fill="#333"/><circle cx="140" cy="175" r="28" fill="#555"/><circle cx="140" cy="175" r="12" fill="#222"/>
+          <circle cx="470" cy="175" r="42" fill="#333"/><circle cx="470" cy="175" r="28" fill="#555"/><circle cx="470" cy="175" r="12" fill="#222"/>
+          <ellipse cx="300" cy="215" rx="265" ry="10" fill="black" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="car-overlay"></div>
+      <div class="car-info">
+        <div class="car-year">2022 · Modern</div>
+        <div class="car-name">Ram 1500<br>TRX</div>
+        <div class="car-owner">702hp · Supercharged · Lifted & Built</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GALLERY MARQUEE -->
+<div id="gallery">
+  <div class="gallery-marquee">
+    <!-- First set -->
+    <div class="gallery-tile" data-car="Challenger SRT">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(217,0,13,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(217,0,13,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="Charger Scat Pack">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(200,168,75,0.15)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(200,168,75,0.15)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="300 SRT-8">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="rgba(0,100,217,0.15)"/><path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="rgba(0,100,217,0.15)"/><circle cx="135" cy="162" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="162" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="1969 Charger 500">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(217,0,13,0.12)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(217,0,13,0.12)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="Viper GTS">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M50 165 Q90 150 110 120 L140 90 L200 68 L380 65 L450 72 L520 108 L560 140 L575 165 Z" fill="rgba(255,92,0,0.15)"/><circle cx="145" cy="165" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="165" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="Durango SRT">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><rect x="80" y="80" width="450" height="90" rx="8" fill="rgba(217,0,13,0.12)"/><circle cx="150" cy="168" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="168" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="Plymouth Roadrunner">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M35 160 Q65 153 82 130 L118 98 L178 76 L365 73 L438 80 L508 113 L552 136 L563 160 Z" fill="rgba(200,168,75,0.12)"/><path d="M138 96 L168 63 L208 48 L358 46 L398 58 L438 80 L365 73 L178 76 Z" fill="rgba(200,168,75,0.12)"/><circle cx="133" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="448" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <div class="gallery-tile" data-car="Challenger Demon">
+      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(100,0,217,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(100,0,217,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div class="gallery-tile" data-car="Challenger SRT"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(217,0,13,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(217,0,13,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="Charger Scat Pack"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(200,168,75,0.15)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(200,168,75,0.15)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="300 SRT-8"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="rgba(0,100,217,0.15)"/><path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="rgba(0,100,217,0.15)"/><circle cx="135" cy="162" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="162" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="1969 Charger 500"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(217,0,13,0.12)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(217,0,13,0.12)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="Viper GTS"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M50 165 Q90 150 110 120 L140 90 L200 68 L380 65 L450 72 L520 108 L560 140 L575 165 Z" fill="rgba(255,92,0,0.15)"/><circle cx="145" cy="165" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="165" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="Durango SRT"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><rect x="80" y="80" width="450" height="90" rx="8" fill="rgba(217,0,13,0.12)"/><circle cx="150" cy="168" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="168" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="Plymouth Roadrunner"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M35 160 Q65 153 82 130 L118 98 L178 76 L365 73 L438 80 L508 113 L552 136 L563 160 Z" fill="rgba(200,168,75,0.12)"/><path d="M138 96 L168 63 L208 48 L358 46 L398 58 L438 80 L365 73 L178 76 Z" fill="rgba(200,168,75,0.12)"/><circle cx="133" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="448" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile" data-car="Challenger Demon"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(100,0,217,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(100,0,217,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="fade-up">
+    <p class="section-eyebrow">2026 Season</p>
+    <h2 class="section-title">Upcoming<br><span style="color:var(--red)">Events</span></h2>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-list">
+
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">May</div>
+          <div class="day">03</div>
+        </div>
+        <div class="event-details">
+          <h3>Spring Kickoff Cruise Night</h3>
+          <p>Carbondale Town Square · Carbondale, IL · 5:00 PM – 9:00 PM</p>
+        </div>
+        <div class="event-type">Cruise</div>
+      </div>
+
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">Jun</div>
+          <div class="day">14</div>
+        </div>
+        <div class="event-details">
+          <h3>618 Mopar Summer Showdown</h3>
+          <p>Marion Civic Center Grounds · Marion, IL · All Day</p>
+        </div>
+        <div class="event-type">Car Show</div>
+      </div>
+
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">Jul</div>
+          <div class="day">19</div>
+        </div>
+        <div class="event-details">
+          <h3>Drag Night at Fairgrounds</h3>
+          <p>Du Quoin State Fairgrounds · Du Quoin, IL · Gates 4 PM</p>
+        </div>
+        <div class="event-type">Drag Racing</div>
+      </div>
+
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">Aug</div>
+          <div class="day">30</div>
+        </div>
+        <div class="event-details">
+          <h3>End-of-Summer Charity Cruise</h3>
+          <p>Belleville Waterfront Park · Belleville, IL · 2:00 PM</p>
+        </div>
+        <div class="event-type">Charity</div>
+      </div>
+
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">Oct</div>
+          <div class="day">11</div>
+        </div>
+        <div class="event-details">
+          <h3>Fall Harvest Show & Swap Meet</h3>
+          <p>Murphysboro Apple Festival Grounds · Murphysboro, IL</p>
+        </div>
+        <div class="event-type">Show & Swap</div>
+      </div>
+
+    </div>
+
+    <!-- JOIN CARD -->
+    <div id="join" class="fade-up">
+      <div class="join-card">
+        <h3>Run With the 618.</h3>
+        <p>Membership is open to any Mopar vehicle owner — old school or new school. Annual dues are just $25 and get you access to all club events, the members-only Facebook group, discounts at partner shops, and a whole lot of good company.</p>
+        <a href="mailto:join@618mopar.com" class="btn-dark">Apply for Membership</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo"><span>618 </span>MOPAR</span>
+    <p>Southern Illinois's home for Chrysler, Dodge, Plymouth, Jeep, and Ram enthusiasts. Old iron or new muscle — all Mopar welcome.</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="#about">About the Club</a></li>
+      <li><a href="#vehicles">Member Rides</a></li>
+      <li><a href="#events">Events Calendar</a></li>
+      <li><a href="#join">Join 618 Mopar</a></li>
+      <li><a href="#">Merchandise</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="mailto:info@618mopar.com">info@618mopar.com</a></li>
+      <li><a href="#">Facebook Group</a></li>
+      <li><a href="#">Instagram @618mopar</a></li>
+      <li><a href="#">Southern Illinois, IL</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 618 Mopar Car Club · Southern Illinois · Built by gearheads, for gearheads.</p>
+    <div class="footer-social">
+      <a href="#" class="social-btn">FB</a>
+      <a href="#" class="social-btn">IG</a>
+      <a href="#" class="social-btn">YT</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, (entry.target.dataset.delay || 0) * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.style.background = 'rgba(10,10,10,0.97)';
+      nav.style.backdropFilter = 'blur(12px)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, rgba(0,0,0,0.95), transparent)';
+      nav.style.backdropFilter = 'none';
+    }
+  });
+</script>
+</body>
+</html>
