@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="618 Mopar Car Club — Southern Illinois's home for Dodge, Chrysler, Plymouth, Jeep, and Ram enthusiasts. Events, member rides, and Mopar community.">
 <title>618 MOPAR — Southern Illinois Car Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -400,17 +401,7 @@
     aspect-ratio: 16/9;
     cursor: pointer;
   }
-  .car-card:first-child {
-    grid-column: span 1;
-    aspect-ratio: 16/9;
-  }
-  .car-card:nth-child(2) {
-    grid-column: span 1;
-    aspect-ratio: 16/9;
-  }
-  .car-card:nth-child(n+3) {
-    grid-column: span 1;
-  }
+
 
   /* SVG car silhouettes as stand-ins */
   .car-bg {
@@ -454,24 +445,9 @@
     margin-top: 2px;
   }
 
-  /* Car illustrations using CSS/SVG */
-  .car-svg {
-    width: 85%;
-    max-width: 480px;
-    opacity: 0.25;
-    filter: drop-shadow(0 0 30px rgba(217,0,13,0.3));
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  .car-card:hover .car-svg {
-    opacity: 0.45;
-    transform: scale(1.04) translateX(-10px);
-  }
-
   /* Gradient overlays per card for variety */
   .car-card:nth-child(1) .car-bg { background: linear-gradient(135deg, #1a0505, #2a0a0a); }
   .car-card:nth-child(2) .car-bg { background: linear-gradient(135deg, #0a0a12, #1a1a2a); }
-  .car-card:nth-child(3) .car-bg { background: linear-gradient(135deg, #0a120a, #1a2a1a); }
-  .car-card:nth-child(4) .car-bg { background: linear-gradient(135deg, #12100a, #2a240a); }
 
   /* ── EVENTS ── */
   #events { 
@@ -773,11 +749,10 @@
     nav { padding: 18px 24px; }
     .nav-links { gap: 20px; }
     section, #vehicles, #events { padding: 70px 24px; }
-    #gallery { margin: 60px 0; padding: 60px 0; overflow: hidden; }
     #hero { padding: 0 24px 60px; }
     #about { grid-template-columns: 1fr; gap: 40px; }
     .car-grid { grid-template-columns: 1fr; }
-    .car-card:first-child { grid-column: span 1; }
+
     .events-grid { grid-template-columns: 1fr; }
     .merch-content { grid-template-columns: 1fr; gap: 40px; }
     .stat-bar { grid-template-columns: repeat(2, 1fr); }
@@ -792,7 +767,6 @@
     nav { padding: 14px 16px; }
     .nav-links { gap: 12px; font-size: 0.75rem; }
     section, #vehicles, #events { padding: 50px 16px; }
-    #gallery { margin: 50px 0; padding: 50px 0; overflow: hidden; }
     #hero { padding: 0 16px 40px; }
     .hero-eyebrow, .hero-sub { font-size: 0.9rem; }
     .hero-title { font-size: clamp(2.5rem, 7vw, 4rem); }
@@ -836,7 +810,6 @@
   <div class="hero-number" aria-hidden="true">618</div>
 
   <div class="hero-content">
-    <!--<img src="Images/Logos/618 Mopar New 2023.png" alt="618 Mopar Logo" style="max-width: 400px; margin-bottom: 24px;">-->
     <img src="Images/Logos/618-GTA-Big-removebg-preview.png" alt="618 Mopar GTA Logo" style="max-width: 400px; margin-bottom: 24px; flex-shrink: 0;">
     <p class="hero-eyebrow">Southern Illinois · Est. Area Code 618</p>
     <h1 class="hero-title">
@@ -899,10 +872,8 @@
 <!-- VEHICLES / MEMBER RIDES -->
 <div id="vehicles">
   <div class="vehicles-header fade-up" style="display: flex; align-items: center; gap: 24px;">
-    <!--<img src="Images/Logos/618-GTA-Big-removebg-preview.png" alt="618 Mopar GTA Logo" style="max-width: 120px; flex-shrink: 0;">-->
-    <img src="Images/Logos/618 Mopar New 2023(blue).png" alt="618 Mopar Logo" style="max-width: 250px; margin-bottom: 24px;">
+    <img src="Images/Logos/618 Mopar New 2023(red).png" alt="618 Mopar Logo" style="max-width: 250px; margin-bottom: 24px;">
     <div>
-      <!--<p class="section-eyebrow">Member Rides</p>-->
       <h2 class="section-title">Leadership Rides</h2>
     </div>
     <a href="#join" class="btn-ghost">Show Us Your Ride →</a>
@@ -913,7 +884,7 @@
     <!-- Card 1 — Challenger Hellcat (featured) -->
     <div class="car-card fade-up">
       <div class="car-bg">
-        <img src="Images/IMG_2290.JPG" alt="Challenger Hellcat">
+        <img loading="lazy" src="Images/IMG_2290.JPG" alt="Challenger Hellcat">
       </div>
       <div class="car-overlay"></div>
       <div class="car-info">
@@ -926,7 +897,7 @@
     <!-- Card 2 — 2019 Charger -->
     <div class="car-card fade-up">
       <div class="car-bg">
-        <img src="Images/2019Charger.jpg" alt="2019 Dodge Charger">
+        <img loading="lazy" src="Images/2019Charger.jpg" alt="2019 Dodge Charger">
       </div>
       <div class="car-overlay"></div>
       <div class="car-info">
@@ -935,8 +906,6 @@
         <div class="car-owner">485hp · 6.4L Hemi V8 ·F8 Green</div>
       </div>
     </div>
-
-    <!-- Card 3 and Card 4 removed -->
 
   </div>
 </div>
@@ -951,59 +920,59 @@
 <div id="gallery">
   <div class="gallery-marquee">
     <!-- First set -->
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2176.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2178.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2180.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2181.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2184.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2189.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2191.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2193.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2196.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2197.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2199.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2202.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2203.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/cropped.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/cropped.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
     <!-- Duplicate for seamless loop -->
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2176.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2178.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2180.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2181.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2184.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2189.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2191.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2193.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2196.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2197.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2199.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2202.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/IMG_2203.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/cropped.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/cropped.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img loading="lazy" src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
     
   </div>
 </div>
@@ -1017,11 +986,11 @@
 
   <div class="merch-content fade-up">
     <div class="merch-images">
-      <img src="Images/Store/618-GTA-Big-removebg-preview.png" alt="618 Mopar Logo Design 1">
-      <img src="Images/Store/618-GTA-Logo-Big-removebg-preview(red).png" alt="618 Mopar Logo Design 2">
+      <img loading="lazy" src="Images/Store/618-GTA-Big-removebg-preview.png" alt="618 Mopar Logo Design 1">
+      <img loading="lazy" src="Images/Store/618-GTA-Logo-Big-removebg-preview(red).png" alt="618 Mopar Logo Design 2">
     </div>
     <div class="merch-text">
-      <p>Rep the 618 with exclusive Mopar gear. Our designs are available on a wide range of products including shirts, hoodies, hats, and more. Show your Southern Illinois pride with quality apparel built for enthusiasts. Simply select the design you like and then scroll down to see all available products</p>
+      <p>Rep the 618 with exclusive Mopar gear. Our designs are available on a wide range of products including shirts, hoodies, hats, and more. Show your Southern Illinois pride with quality apparel built for enthusiasts. Simply select the design you like and then scroll down to see all available products.</p>
       <a href="https://www.teepublic.com/user/quest-island/albums/420241-618-mopar" target="_blank" rel="noopener noreferrer" class="btn-primary">Shop 618 Mopar Store</a>
     </div>
   </div>
@@ -1065,7 +1034,7 @@
       <div class="join-card">
         <h3>Run With the 618.</h3>
         <p>Membership is open to any Mopar vehicle owner — old school or new school. There is no formal registration process, just simply join our Facebook Group and introduce yourself!</p>
-        <a href="https://www.facebook.com/groups/618mopar/" target="_blank">Join 618 Mopar</a>
+        <a href="https://www.facebook.com/groups/618mopar/" target="_blank" rel="noopener noreferrer" class="btn-dark">Join 618 Mopar</a>
       </div>
     </div>
 
@@ -1076,7 +1045,6 @@
 <footer>
   <div class="footer-brand">
     <img src="Images/Logos/618-GTA-Logo-Big-removebg-preview(red).png" alt="618 Mopar Logo" style="max-width: 250px; margin-bottom: 16px;">
-    <!--<span class="logo"><span>618 </span>MOPAR</span>-->
     <p>Southern Illinois's home for Chrysler, Dodge, Plymouth, Jeep, and Ram enthusiasts. Old iron or new muscle — all Mopar welcome.</p>
   </div>
 
@@ -1098,16 +1066,15 @@
       <li><a href="https://www.facebook.com/618mopar" target="_blank" rel="noopener noreferrer">Facebook Page</a></li>
       <li><a href="https://www.facebook.com/groups/618mopar/" target="_blank" rel="noopener noreferrer">Facebook Group</a></li>
       <li><a href="https://www.instagram.com/618mopar/" target="_blank" rel="noopener noreferrer">Instagram @618mopar</a></li>
-      <!--<li><a href="#">Southern Illinois, IL</a></li>-->
+
     </ul>
   </div>
 
   <div class="footer-bottom">
     <p>© 2026 618 Mopar Car Club · Southern Illinois · Built by gearheads, for gearheads.</p>
     <div class="footer-social">
-      <a href="#" class="social-btn">FB</a>
-      <a href="#" class="social-btn">IG</a>
-      <a href="#" class="social-btn">YT</a>
+      <a href="https://www.facebook.com/618mopar" target="_blank" rel="noopener noreferrer" class="social-btn">FB</a>
+      <a href="https://www.instagram.com/618mopar/" target="_blank" rel="noopener noreferrer" class="social-btn">IG</a>
     </div>
   </div>
 </footer>
