@@ -612,10 +612,17 @@
     gap: 4px;
     animation: marquee 30s linear infinite;
     width: max-content;
+    cursor: grab;
+    user-select: none;
+    --drag-offset: 0px;
+  }
+  .gallery-marquee.dragging {
+    animation-play-state: paused !important;
+    cursor: grabbing;
   }
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: translateX(var(--drag-offset)); }
+    to { transform: translateX(calc(var(--drag-offset) - 50%)); }
   }
   .gallery-tile {
     width: 240px;
@@ -1105,6 +1112,55 @@
       nav.style.backdropFilter = 'none';
     }
   });
+
+  // Interactive gallery with drag and auto-scroll
+  const gallery = document.querySelector('#gallery');
+  const marquee = document.querySelector('.gallery-marquee');
+  let isDown = false;
+  let startX = 0;
+  let lastX = 0;
+  let dragOffset = 0;
+  let resumeTimeout = null;
+
+  gallery.addEventListener('mousedown', startDrag);
+  gallery.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('mousemove', drag, { passive: false });
+  document.addEventListener('touchmove', drag, { passive: false });
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('mouseleave', stopDrag);
+  document.addEventListener('touchend', stopDrag);
+
+  function startDrag(e) {
+    isDown = true;
+    startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    lastX = startX;
+    marquee.classList.add('dragging');
+    marquee.style.animation = 'none';
+    clearTimeout(resumeTimeout);
+    console.log('Start drag at:', startX);
+  }
+
+  function drag(e) {
+    if (!isDown) return;
+    
+    const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    const walk = (x - startX) * 1.5;
+    marquee.style.transform = `translateX(${dragOffset + walk}px)`;
+  }
+
+  function stopDrag() {
+    if (!isDown) return;
+    isDown = false;
+    marquee.classList.remove('dragging');
+    
+    // Update cumulative drag offset
+    dragOffset += (lastX - startX) * 1.5;
+    
+    // Resume auto-scroll after 2 seconds
+    resumeTimeout = setTimeout(() => {
+      marquee.style.animation = 'marquee 30s linear infinite';
+    }, 2000);
+  }
 </script>
 </body>
 </html>
