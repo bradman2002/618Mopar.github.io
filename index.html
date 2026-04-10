@@ -389,7 +389,7 @@
 
   .car-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2px;
   }
 
@@ -397,7 +397,7 @@
     background: var(--steel);
     position: relative;
     overflow: hidden;
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/9;
     cursor: pointer;
   }
   .car-card:first-child {
@@ -548,6 +548,45 @@
     white-space: nowrap;
   }
 
+  /* ── MERCH ── */
+  #merch {
+    background: linear-gradient(180deg, #111111 0%, #0A0A0A 100%);
+    border-top: 1px solid rgba(217,0,13,0.2);
+    border-bottom: 1px solid rgba(217,0,13,0.2);
+  }
+  .merch-content {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .merch-images {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .merch-images img {
+    max-width: 160px;
+    height: auto;
+    filter: drop-shadow(0 8px 20px rgba(217,0,13,0.2));
+    transition: transform 0.3s ease;
+  }
+  .merch-images img:hover {
+    transform: scale(1.05);
+  }
+  .merch-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .merch-text p {
+    color: var(--silver);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+
   /* Sidebar join card */
   .join-card {
     background: var(--red);
@@ -600,29 +639,20 @@
 
   /* ── GALLERY STRIP ── */
   #gallery {
-    margin: 60px -48px;
-    padding: 60px 48px;
+    margin: 60px 0;
+    padding: 60px 0;
     background: var(--dark);
     overflow: hidden;
-    width: calc(100% + 96px);
-    box-sizing: border-box;
   }
   .gallery-marquee {
     display: flex;
     gap: 4px;
     animation: marquee 30s linear infinite;
     width: max-content;
-    cursor: grab;
-    user-select: none;
-    --drag-offset: 0px;
-  }
-  .gallery-marquee.dragging {
-    animation-play-state: paused !important;
-    cursor: grabbing;
   }
   @keyframes marquee {
-    from { transform: translateX(var(--drag-offset)); }
-    to { transform: translateX(calc(var(--drag-offset) - 50%)); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   .gallery-tile {
     width: 240px;
@@ -651,9 +681,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 48px;
     border-top: 2px solid var(--red);
-    margin: 0 -48px;
-    width: calc(100% + 96px);
-    box-sizing: border-box;
   }
 
   .footer-brand .logo {
@@ -746,14 +773,15 @@
     nav { padding: 18px 24px; }
     .nav-links { gap: 20px; }
     section, #vehicles, #events { padding: 70px 24px; }
-    #gallery { margin: 60px -24px; padding: 60px 24px; overflow: hidden; width: calc(100% + 48px); box-sizing: border-box; }
+    #gallery { margin: 60px 0; padding: 60px 0; overflow: hidden; }
     #hero { padding: 0 24px 60px; }
     #about { grid-template-columns: 1fr; gap: 40px; }
     .car-grid { grid-template-columns: 1fr; }
     .car-card:first-child { grid-column: span 1; }
     .events-grid { grid-template-columns: 1fr; }
+    .merch-content { grid-template-columns: 1fr; gap: 40px; }
     .stat-bar { grid-template-columns: repeat(2, 1fr); }
-    footer { grid-template-columns: 1fr; margin: 0 -24px; width: calc(100% + 48px); box-sizing: border-box; }
+    footer { grid-template-columns: 1fr; }
     .hero-number { font-size: 40vw; }
     .vehicles-header { flex-direction: column; align-items: flex-start !important; }
     .vehicles-header img { max-width: 150px !important; margin-bottom: 16px !important; }
@@ -764,7 +792,7 @@
     nav { padding: 14px 16px; }
     .nav-links { gap: 12px; font-size: 0.75rem; }
     section, #vehicles, #events { padding: 50px 16px; }
-    #gallery { margin: 50px -16px; padding: 50px 16px; width: calc(100% + 32px); }
+    #gallery { margin: 50px 0; padding: 50px 0; overflow: hidden; }
     #hero { padding: 0 16px 40px; }
     .hero-eyebrow, .hero-sub { font-size: 0.9rem; }
     .hero-title { font-size: clamp(2.5rem, 7vw, 4rem); }
@@ -774,7 +802,9 @@
     .vehicles-header { gap: 12px; }
     .vehicles-header img { max-width: 100px !important; }
     .vehicles-header .btn-ghost { font-size: 0.75rem; padding: 12px 20px; width: 100%; }
-    footer { margin: 0 -16px; width: calc(100% + 32px); }
+    .merch-images img { max-width: 120px; }
+    .merch-text p { font-size: 0.95rem; }
+    footer { grid-template-columns: 1fr; }
     .join-card { padding: 32px 20px; }
   }
 
@@ -794,6 +824,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#vehicles">Rides</a></li>
+    <li><a href="#merch">Merch</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#join">Join</a></li>
   </ul>
@@ -905,53 +936,7 @@
       </div>
     </div>
 
-    <!-- Card 3 — Plymouth 'Cuda 
-    <div class="car-card fade-up">
-      <div class="car-bg">
-        <svg class="car-svg" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="white"/>
-          <path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="white"/>
-          <path d="M185 80 L200 55 L265 48 L265 78 Z" fill="black" opacity="0.6"/>
-          <path d="M270 78 L270 47 L348 46 L384 62 L384 78 Z" fill="black" opacity="0.6"/>
-          <circle cx="135" cy="162" r="36" fill="#333"/><circle cx="135" cy="162" r="24" fill="#555"/><circle cx="135" cy="162" r="10" fill="#222"/>
-          <circle cx="450" cy="162" r="36" fill="#333"/><circle cx="450" cy="162" r="24" fill="#555"/><circle cx="450" cy="162" r="10" fill="#222"/>
-          <ellipse cx="295" cy="196" rx="255" ry="10" fill="black" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="car-overlay"></div>
-      <div class="car-info">
-        <div class="car-year">1971 · Classic</div>
-        <div class="car-name">Plymouth<br>'Cuda</div>
-        <div class="car-owner">426 HEMI · Vitamin C Orange</div>
-      </div>
-    </div>
-
-     Card 4 — Ram TRX 
-    <div class="car-card fade-up">
-      <div class="car-bg">
-        <svg class="car-svg" viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-          <path d="M30 175 Q55 168 70 148 L80 120 L130 90 L215 80 L215 175 Z" fill="white"/>
-          <path d="M215 80 L215 175 L560 175 L545 148 L510 120 L480 105 L215 100 Z" fill="white"/>
-
-          <path d="M90 118 L110 68 L155 50 L210 48 L215 80 L215 100 L130 90 Z" fill="white"/>
-
-          <path d="M116 90 L128 58 L175 50 L212 52 L212 90 Z" fill="black" opacity="0.6"/>
-
-          <rect x="218" y="85" width="250" height="90" rx="2" fill="rgba(255,255,255,0.15)"/>
-
-          <circle cx="140" cy="175" r="42" fill="#333"/><circle cx="140" cy="175" r="28" fill="#555"/><circle cx="140" cy="175" r="12" fill="#222"/>
-          <circle cx="470" cy="175" r="42" fill="#333"/><circle cx="470" cy="175" r="28" fill="#555"/><circle cx="470" cy="175" r="12" fill="#222"/>
-          <ellipse cx="300" cy="215" rx="265" ry="10" fill="black" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="car-overlay"></div>
-      <div class="car-info">
-        <div class="car-year">2022 · Modern</div>
-        <div class="car-name">Ram 1500<br>TRX</div>
-        <div class="car-owner">702hp · Supercharged · Lifted & Built</div>
-      </div>
-    </div>
+    <!-- Card 3 and Card 4 removed -->
 
   </div>
 </div>
@@ -966,37 +951,81 @@
 <div id="gallery">
   <div class="gallery-marquee">
     <!-- First set -->
-    <div class="gallery-tile"><img src="Images/2019Charger.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2176.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2178.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2180.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2181.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2184.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2189.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2191.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2193.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2196.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2197.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2199.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2202.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/cropped.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
     <!-- Duplicate for seamless loop -->
-    <div class="gallery-tile"><img src="Images/2019Charger.jpg" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2176.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2178.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2180.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2181.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2184.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2189.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2191.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2193.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2196.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2197.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2199.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2202.JPG" alt=""></div>
-    <div class="gallery-tile"><img src="Images/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/IMG_2203.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/659686772_3714086378734085_7873717543758575113_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/659796551_2101155690741795_2705861980223177763_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660313230_26858892237062393_4654299757972491126_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660429016_122175552872596325_5500033846804042340_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/660985781_34687568504221686_3926332225014662704_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661455371_26367359612931525_2173454961224022_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661719294_26668042792791145_368631060010447908_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/661999966_10244923757213572_7354484041714104551_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/662619511_27604357142487641_5292177786171430569_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/cropped.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/662641097_26788561244116523_3464206118409517658_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/663223045_35170718359193189_2526961126913508103_n.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/gallery/668080048_34689832130632399_561714406093628134_n.jpg" alt=""></div>
+    
   </div>
 </div>
+
+<!-- MERCH -->
+<section id="merch">
+  <div class="fade-up">
+    <p class="section-eyebrow">Official Store</p>
+    <h2 class="section-title">618 Mopar<br><span style="color:var(--red)">Gear</span></h2>
+  </div>
+
+  <div class="merch-content fade-up">
+    <div class="merch-images">
+      <img src="Images/Store/618-GTA-Big-removebg-preview.png" alt="618 Mopar Logo Design 1">
+      <img src="Images/Store/618-GTA-Logo-Big-removebg-preview(red).png" alt="618 Mopar Logo Design 2">
+    </div>
+    <div class="merch-text">
+      <p>Rep the 618 with exclusive Mopar gear. Our designs are available on a wide range of products including shirts, hoodies, hats, and more. Show your Southern Illinois pride with quality apparel built for enthusiasts. Simply select the design you like and then scroll down to see all available products</p>
+      <a href="https://www.teepublic.com/user/quest-island/albums/420241-618-mopar" target="_blank" rel="noopener noreferrer" class="btn-primary">Shop 618 Mopar Store</a>
+    </div>
+  </div>
+</section>
 
 <!-- EVENTS -->
 <section id="events">
@@ -1058,17 +1087,17 @@
       <li><a href="#vehicles">Member Rides</a></li>
       <li><a href="#events">Events Calendar</a></li>
       <li><a href="#join">Join 618 Mopar</a></li>
-      <li><a href="#">Merchandise</a></li>
+      <li><a href="#merch">Merchandise</a></li>
     </ul>
   </div>
 
   <div class="footer-col">
     <h4>Contact</h4>
     <ul>
-      <li><a href="mailto:618mopar@gmail.com">618mopar@gmail.com</a></li>
-      <li><a href="https://www.facebook.com/618mopar">Facebook Page</a></li>
-      <li><a href="https://www.facebook.com/groups/618mopar/">Facebook Group</a></li>
-      <li><a href="https://www.instagram.com/618mopar/">Instagram @618mopar</a></li>
+      <li><a href="mailto:618mopar@gmail.com" target="_blank" rel="noopener noreferrer">618mopar@gmail.com</a></li>
+      <li><a href="https://www.facebook.com/618mopar" target="_blank" rel="noopener noreferrer">Facebook Page</a></li>
+      <li><a href="https://www.facebook.com/groups/618mopar/" target="_blank" rel="noopener noreferrer">Facebook Group</a></li>
+      <li><a href="https://www.instagram.com/618mopar/" target="_blank" rel="noopener noreferrer">Instagram @618mopar</a></li>
       <!--<li><a href="#">Southern Illinois, IL</a></li>-->
     </ul>
   </div>
@@ -1112,55 +1141,6 @@
       nav.style.backdropFilter = 'none';
     }
   });
-
-  // Interactive gallery with drag and auto-scroll
-  const gallery = document.querySelector('#gallery');
-  const marquee = document.querySelector('.gallery-marquee');
-  let isDown = false;
-  let startX = 0;
-  let lastX = 0;
-  let dragOffset = 0;
-  let resumeTimeout = null;
-
-  gallery.addEventListener('mousedown', startDrag);
-  gallery.addEventListener('touchstart', startDrag, { passive: false });
-  document.addEventListener('mousemove', drag, { passive: false });
-  document.addEventListener('touchmove', drag, { passive: false });
-  document.addEventListener('mouseup', stopDrag);
-  document.addEventListener('mouseleave', stopDrag);
-  document.addEventListener('touchend', stopDrag);
-
-  function startDrag(e) {
-    isDown = true;
-    startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    lastX = startX;
-    marquee.classList.add('dragging');
-    marquee.style.animation = 'none';
-    clearTimeout(resumeTimeout);
-    console.log('Start drag at:', startX);
-  }
-
-  function drag(e) {
-    if (!isDown) return;
-    
-    const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    const walk = (x - startX) * 1.5;
-    marquee.style.transform = `translateX(${dragOffset + walk}px)`;
-  }
-
-  function stopDrag() {
-    if (!isDown) return;
-    isDown = false;
-    marquee.classList.remove('dragging');
-    
-    // Update cumulative drag offset
-    dragOffset += (lastX - startX) * 1.5;
-    
-    // Resume auto-scroll after 2 seconds
-    resumeTimeout = setTimeout(() => {
-      marquee.style.animation = 'marquee 30s linear infinite';
-    }, 2000);
-  }
 </script>
 </body>
 </html>
