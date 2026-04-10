@@ -389,7 +389,7 @@
 
   .car-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 2px;
   }
 
@@ -401,8 +401,15 @@
     cursor: pointer;
   }
   .car-card:first-child {
-    grid-column: span 2;
+    grid-column: span 1;
     aspect-ratio: 16/9;
+  }
+  .car-card:nth-child(2) {
+    grid-column: span 1;
+    aspect-ratio: 16/9;
+  }
+  .car-card:nth-child(n+3) {
+    grid-column: span 1;
   }
 
   /* SVG car silhouettes as stand-ins */
@@ -467,7 +474,9 @@
   .car-card:nth-child(4) .car-bg { background: linear-gradient(135deg, #12100a, #2a240a); }
 
   /* ── EVENTS ── */
-  #events { padding: 100px 48px; }
+  #events { 
+    padding: 60px 48px;
+  }
 
   .events-grid {
     display: grid;
@@ -591,9 +600,12 @@
 
   /* ── GALLERY STRIP ── */
   #gallery {
-    padding: 60px 0;
+    margin: 60px -48px;
+    padding: 60px 48px;
     background: var(--dark);
     overflow: hidden;
+    width: calc(100% + 96px);
+    box-sizing: border-box;
   }
   .gallery-marquee {
     display: flex;
@@ -612,26 +624,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Black Ops One', cursive;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0.12);
     position: relative;
     overflow: hidden;
   }
   .gallery-tile:nth-child(odd) { background: #181818; }
   .gallery-tile:nth-child(even) { background: #141414; }
-  .gallery-tile::after {
-    content: attr(data-car);
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(217,0,13,0.7);
+
+  .gallery-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* ── FOOTER ── */
@@ -642,6 +644,9 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 48px;
     border-top: 2px solid var(--red);
+    margin: 0 -48px;
+    width: calc(100% + 96px);
+    box-sizing: border-box;
   }
 
   .footer-brand .logo {
@@ -734,13 +739,14 @@
     nav { padding: 18px 24px; }
     .nav-links { gap: 20px; }
     section, #vehicles, #events { padding: 70px 24px; }
+    #gallery { margin: 60px -24px; padding: 60px 24px; overflow: hidden; width: calc(100% + 48px); box-sizing: border-box; }
     #hero { padding: 0 24px 60px; }
     #about { grid-template-columns: 1fr; gap: 40px; }
     .car-grid { grid-template-columns: 1fr; }
     .car-card:first-child { grid-column: span 1; }
     .events-grid { grid-template-columns: 1fr; }
     .stat-bar { grid-template-columns: repeat(2, 1fr); }
-    footer { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; margin: 0 -24px; width: calc(100% + 48px); box-sizing: border-box; }
     .hero-number { font-size: 40vw; }
   }
 
@@ -834,7 +840,7 @@
   <div class="vehicles-header fade-up">
     <div>
       <p class="section-eyebrow">Member Rides</p>
-      <h2 class="section-title">The Fleet</h2>
+      <h2 class="section-title">Group Leadership Rides</h2>
     </div>
     <a href="#join" class="btn-ghost">Submit Your Ride →</a>
   </div>
@@ -867,7 +873,7 @@
       </div>
     </div>
 
-    <!-- Card 3 — Plymouth 'Cuda -->
+    <!-- Card 3 — Plymouth 'Cuda 
     <div class="car-card fade-up">
       <div class="car-bg">
         <svg class="car-svg" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -888,20 +894,20 @@
       </div>
     </div>
 
-    <!-- Card 4 — Ram TRX -->
+     Card 4 — Ram TRX 
     <div class="car-card fade-up">
       <div class="car-bg">
         <svg class="car-svg" viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Truck body -->
+
           <path d="M30 175 Q55 168 70 148 L80 120 L130 90 L215 80 L215 175 Z" fill="white"/>
           <path d="M215 80 L215 175 L560 175 L545 148 L510 120 L480 105 L215 100 Z" fill="white"/>
-          <!-- Cab roof -->
+
           <path d="M90 118 L110 68 L155 50 L210 48 L215 80 L215 100 L130 90 Z" fill="white"/>
-          <!-- Windows -->
+
           <path d="M116 90 L128 58 L175 50 L212 52 L212 90 Z" fill="black" opacity="0.6"/>
-          <!-- Bed -->
+
           <rect x="218" y="85" width="250" height="90" rx="2" fill="rgba(255,255,255,0.15)"/>
-          <!-- Wheels - big truck wheels -->
+
           <circle cx="140" cy="175" r="42" fill="#333"/><circle cx="140" cy="175" r="28" fill="#555"/><circle cx="140" cy="175" r="12" fill="#222"/>
           <circle cx="470" cy="175" r="42" fill="#333"/><circle cx="470" cy="175" r="28" fill="#555"/><circle cx="470" cy="175" r="12" fill="#222"/>
           <ellipse cx="300" cy="215" rx="265" ry="10" fill="black" opacity="0.5"/>
@@ -922,39 +928,35 @@
 <div id="gallery">
   <div class="gallery-marquee">
     <!-- First set -->
-    <div class="gallery-tile" data-car="Challenger SRT">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(217,0,13,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(217,0,13,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="Charger Scat Pack">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(200,168,75,0.15)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(200,168,75,0.15)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="300 SRT-8">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="rgba(0,100,217,0.15)"/><path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="rgba(0,100,217,0.15)"/><circle cx="135" cy="162" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="162" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="1969 Charger 500">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(217,0,13,0.12)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(217,0,13,0.12)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="Viper GTS">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M50 165 Q90 150 110 120 L140 90 L200 68 L380 65 L450 72 L520 108 L560 140 L575 165 Z" fill="rgba(255,92,0,0.15)"/><circle cx="145" cy="165" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="165" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="Durango SRT">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><rect x="80" y="80" width="450" height="90" rx="8" fill="rgba(217,0,13,0.12)"/><circle cx="150" cy="168" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="168" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="Plymouth Roadrunner">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M35 160 Q65 153 82 130 L118 98 L178 76 L365 73 L438 80 L508 113 L552 136 L563 160 Z" fill="rgba(200,168,75,0.12)"/><path d="M138 96 L168 63 L208 48 L358 46 L398 58 L438 80 L365 73 L178 76 Z" fill="rgba(200,168,75,0.12)"/><circle cx="133" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="448" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
-    <div class="gallery-tile" data-car="Challenger Demon">
-      <svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(100,0,217,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(100,0,217,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg>
-    </div>
+    <div class="gallery-tile"><img src="Images/2019Charger.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2203.JPG" alt=""></div>
     <!-- Duplicate for seamless loop -->
-    <div class="gallery-tile" data-car="Challenger SRT"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(217,0,13,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(217,0,13,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="Charger Scat Pack"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(200,168,75,0.15)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(200,168,75,0.15)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="300 SRT-8"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M40 162 Q70 155 90 132 L125 100 L175 78 L360 74 L430 80 L500 112 L550 138 L560 162 Z" fill="rgba(0,100,217,0.15)"/><path d="M145 98 L175 60 L220 46 L355 44 L395 56 L430 80 L360 74 L175 78 Z" fill="rgba(0,100,217,0.15)"/><circle cx="135" cy="162" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="162" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="1969 Charger 500"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M25 160 Q55 152 70 130 L100 100 L160 80 L360 76 L440 82 L510 115 L555 135 L565 160 Z" fill="rgba(217,0,13,0.12)"/><path d="M120 98 L150 65 L200 50 L355 48 L400 58 L440 82 L360 76 L160 80 Z" fill="rgba(217,0,13,0.12)"/><circle cx="130" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="Viper GTS"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M50 165 Q90 150 110 120 L140 90 L200 68 L380 65 L450 72 L520 108 L560 140 L575 165 Z" fill="rgba(255,92,0,0.15)"/><circle cx="145" cy="165" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="165" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="Durango SRT"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><rect x="80" y="80" width="450" height="90" rx="8" fill="rgba(217,0,13,0.12)"/><circle cx="150" cy="168" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="450" cy="168" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="Plymouth Roadrunner"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M35 160 Q65 153 82 130 L118 98 L178 76 L365 73 L438 80 L508 113 L552 136 L563 160 Z" fill="rgba(200,168,75,0.12)"/><path d="M138 96 L168 63 L208 48 L358 46 L398 58 L438 80 L365 73 L178 76 Z" fill="rgba(200,168,75,0.12)"/><circle cx="133" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="448" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
-    <div class="gallery-tile" data-car="Challenger Demon"><svg width="180" height="70" viewBox="0 0 600 220" fill="none"><path d="M30 160 Q60 155 80 130 L130 95 L200 75 L370 72 L450 80 L510 110 L555 130 L570 160 Z" fill="rgba(100,0,217,0.15)"/><path d="M140 95 L185 55 L220 42 L370 40 L410 50 L450 80 L370 72 L200 75 Z" fill="rgba(100,0,217,0.15)"/><circle cx="140" cy="160" r="28" fill="rgba(255,255,255,0.08)"/><circle cx="455" cy="160" r="28" fill="rgba(255,255,255,0.08)"/></svg></div>
+    <div class="gallery-tile"><img src="Images/2019Charger.jpg" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2176.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2178.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2180.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2181.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2184.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2189.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2191.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2193.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2196.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2197.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2199.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2202.JPG" alt=""></div>
+    <div class="gallery-tile"><img src="Images/IMG_2203.JPG" alt=""></div>
   </div>
 </div>
 
