@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="618 Mopar Car Club — Southern Illinois's home for Dodge, Chrysler, Plymouth, Jeep, and Ram enthusiasts. Events, member rides, and Mopar community.">
+<meta property="og:title" content="618 MOPAR - Southern Illinois Car Club">
+<meta property="og:description" content="Southern Illinois's home for Dodge, Chrysler, Plymouth, Jeep, and Ram enthusiasts. Events, member rides, and Mopar community.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://618mopar.vercel.app/">
+<meta property="og:image" content="https://618mopar.vercel.app/Images/Logos/618%20Mopar%20New%202023.png">
+<meta property="og:image:alt" content="618 Mopar Car Club logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="618 MOPAR - Southern Illinois Car Club">
+<meta name="twitter:description" content="Southern Illinois's home for Dodge, Chrysler, Plymouth, Jeep, and Ram enthusiasts. Events, member rides, and Mopar community.">
+<meta name="twitter:image" content="https://618mopar.vercel.app/Images/Logos/618%20Mopar%20New%202023.png">
 <title>618 MOPAR — Southern Illinois Car Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -514,14 +524,32 @@
 
   .event-type {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.68rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 6px 14px;
+    padding: 18px 30px;
     border: 1px solid rgba(217,0,13,0.5);
     color: var(--red);
     white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 68px;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .event-type:hover {
+    border-color: var(--red);
+    background: rgba(217,0,13,0.08);
+    color: var(--white);
+  }
+  .event-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
   /* ── MERCH ── */
@@ -623,7 +651,7 @@
   .gallery-marquee {
     display: flex;
     gap: 4px;
-    animation: marquee 30s linear infinite;
+    animation: marquee 45s linear infinite;
     width: max-content;
   }
   @keyframes marquee {
@@ -780,6 +808,20 @@
     .merch-text p { font-size: 0.95rem; }
     footer { grid-template-columns: 1fr; }
     .join-card { padding: 32px 20px; }
+    .event-item {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      text-align: center;
+    }
+    .event-date {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+    }
+    .event-actions {
+      justify-content: center;
+    }
   }
 
   .car-bg img {
@@ -884,7 +926,7 @@
     <!-- Card 1 — Challenger Hellcat (featured) -->
     <div class="car-card fade-up">
       <div class="car-bg">
-        <img loading="lazy" src="Images/IMG_2290.JPG" alt="Challenger Hellcat">
+        <img loading="lazy" src="Images/Hellcat.JPG" alt="Challenger Hellcat">
       </div>
       <div class="car-overlay"></div>
       <div class="car-info">
@@ -1006,19 +1048,20 @@
   <div class="events-grid">
     <div class="event-list">
 
-      <a href="https://www.facebook.com/share/1J3xCfJmN7/" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="event-item fade-up">
-          <div class="event-date">
-            <div class="month">Sep</div>
-            <div class="day">06</div>
-          </div>
-          <div class="event-details">
-            <h3>618 Mopar Meet at the Lake</h3>
-            <p>North Marcum Beach · 1:00 PM</p>
-          </div>
-          <div class="event-type">Meet</div>
+      <div class="event-item fade-up">
+        <div class="event-date">
+          <div class="month">Sep</div>
+          <div class="day">06</div>
         </div>
-      </a>
+        <div class="event-details">
+          <h3>618 Mopar Meet at the Lake</h3>
+          <p>North Marcum Beach · 1:00 PM</p>
+        </div>
+        <div class="event-actions">
+          <a href="https://forms.gle/THUcADEakcMEf1AC7" target="_blank" rel="noopener noreferrer" class="event-type">Register</a>
+          <a href="https://www.facebook.com/share/1J3xCfJmN7/" target="_blank" rel="noopener noreferrer" class="event-type">FB Event</a>
+        </div>
+      </div>
 
       <div class="event-item fade-up" style="opacity: 0.7;">
         <div class="event-details" style="text-align: center; grid-column: 1 / -1;">
